@@ -1,10 +1,13 @@
 -- 1) Go back to the dvdrental database, and get the average, standard deviation, and count
 -- of each customer's lifetime spending. (This is a lot like yesterday's warmup).
 
-
-
-
-
+with customer_info as (
+    SELECT customer_id, COUNT(payment_id), SUM(amount) as total
+    FROM payment
+GROUP BY customer_id 
+)
+SELECT COUNT(total) AS count, AVG(total) as average, STDDEV(total) as standard_deviation
+FROM customer_info;
 
 -- 2) Your boss is absolutely certain (like 99%) that his new marketing strategy will increase
 -- average customer spending by more than 10%, making the company an extra $100,000+ next year.
